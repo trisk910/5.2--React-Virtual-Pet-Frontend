@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../Resources/Style/Register.css";
 import wallpaperWellcome from '../Resources/Images/optimized_background_4k.gif';
-import editIcon from '../Resources/Images/ProfileImages/editIcon.gif'; 
+import editIcon from '../Resources/Images/ProfileImages/editIcon.gif';
 
 export default function Register() {
     const [profile, setProfile] = useState("defaultProfile");
