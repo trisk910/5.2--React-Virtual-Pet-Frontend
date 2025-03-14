@@ -11,10 +11,12 @@ export default function Workshop() {
     const [user, setUser] = useState(null);
     const [robots, setRobots] = useState([]);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [renameModal, setRenameModal] = useState({ open: false, robot: null });
+    const [destroyModal, setDestroyModal] = useState({ open: false, robot: null });
+    const [newName, setNewName] = useState("");
     const navigate = useNavigate();
 
     useEffect(() => {
-        // Obtener datos del usuario desde el almacenamiento local
         const storedUser = localStorage.getItem("user");
         const parsedUser = storedUser ? JSON.parse(storedUser) : null;
 
@@ -33,7 +35,6 @@ export default function Workshop() {
         tankProfile: require("../Resources/Images/ProfileImages/tankProfile.png")
     };
 
-
     const fetchRobots = async (user) => {
         const endpoint = user.roleType === "ADMIN" ? "/robos/all" : `/robos/get/${user.id}`;
         try {
@@ -42,20 +43,16 @@ export default function Workshop() {
             });
             if (response.ok) {
                 const data = await response.json();
-                console.log("Robots API response:", data);
                 if (data.robos && Array.isArray(data.robos)) {
                     setRobots(data.robos);
                 } else {
                     setRobots([]);
-                    console.error("Unexpected response format:", data);
                 }
             } else {
                 setRobots([]);
-                console.error("Failed to fetch robots, response:", response.status);
             }
         } catch (error) {
             setRobots([]);
-            console.error("Error fetching robots:", error);
         }
     };
 
@@ -76,10 +73,44 @@ export default function Workshop() {
         }
     };
 
+    const handleRename = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/robos/update?id=${renameModal.robot.id}&name=${newName}`, {
+                method: "PUT",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            if (response.ok) {
+                fetchRobots(user);
+                setRenameModal({ open: false, robot: null });
+            } else {
+                console.error("Failed to rename robot:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error renaming robot:", error);
+        }
+    };
+
+    const handleDestroy = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/robos/destroy/${destroyModal.robot.id}`, {
+                method: "DELETE",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            if (response.ok) {
+                fetchRobots(user);
+                setDestroyModal({ open: false, robot: null });
+            }
+        } catch (error) {
+            console.error("Error destroying robot:", error);
+        }
+    };
 
     return (
         <div className="workshop-container" style={{ backgroundImage: `url(${wallpaper})` }}>
-            {/* Header */}
             <header className="header">
                 <div className="menu" onClick={() => setMenuOpen(!menuOpen)}>
                     <img src={menuIcon} alt="Menu" className="menu-icon" />
@@ -105,7 +136,6 @@ export default function Workshop() {
                 )}
             </header>
 
-
             <div className="robot-section">
                 {robots.length === 0 ? (
                     <button className="build-robo-button">Build Robo</button>
@@ -127,10 +157,9 @@ export default function Workshop() {
                                         <li>Happiness: {robot.happiness || 0}</li>
                                     </ul>
 
-
                                     <div className="robot-actions">
-                                        <button className="rename-button">Rename</button>
-                                        <button className="destroy-button">Destroy</button>
+                                        <button className="rename-button" onClick={() => setRenameModal({ open: true, robot })}>Rename</button>
+                                        <button className="destroy-button" onClick={() => setDestroyModal({ open: true, robot })}>Destroy</button>
                                     </div>
                                 </div>
                             ))}
@@ -138,6 +167,32 @@ export default function Workshop() {
                     </>
                 )}
             </div>
+
+            {renameModal.open && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Rename Robot</h3>
+                        <input
+                            type="text"
+                            value={newName}
+                            onChange={(e) => setNewName(e.target.value)}
+                            placeholder="New Name"
+                        />
+                        <button className="rename-button" onClick={handleRename}>Accept</button>
+                        <button className="destroy-button" onClick={() => setRenameModal({ open: false, robot: null })}>Cancel</button>
+                    </div>
+                </div>
+            )}
+
+            {destroyModal.open && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Are you sure?</h3>
+                        <button className="rename-button" onClick={handleDestroy}>Accept</button>
+                        <button className="destroy-button" onClick={() => setDestroyModal({ open: false, robot: null })}>Cancel</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
