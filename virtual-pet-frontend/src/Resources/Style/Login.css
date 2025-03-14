@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.login-container {
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    border-radius: 15px;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 20px #00ff00;
+    width: 300px;
+}
+
+.login-container h1 {
+    font-size: 2.5rem;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #00ff00;
+    outline: none;
+}
+
+.input-group input::placeholder {
+    color: #00ff00;
+    opacity: 0.7;
+}
+
+.login-container button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: #00ff00;
+    border: none;
+    border-radius: 5px;
+    color: #000;
+    transition: background-color 0.3s, transform 0.3s;
+    width: 100%;
+}
+
+.login-container button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+}
+
+.login-container button:active {
+    background-color: #009900;
+    transform: scale(0.95);
+}
+
+.register-link {
+    margin-top: 15px;
+    color: #00ff00;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.register-link span {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.register-link:hover span {
+    color: #00cc00;
+}
