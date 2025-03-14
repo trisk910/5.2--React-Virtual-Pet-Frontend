@@ -1,0 +1,178 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+.workshop-container {
+    font-family: 'Orbitron', sans-serif;
+    background-color: black;
+    color: #00ff00;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px 30px;
+    border-bottom: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    position: relative;
+}
+
+.menu {
+    position: relative;
+    cursor: pointer;
+}
+
+.menu-icon {
+    width: 30px;
+    height: 30px;
+}
+
+.menu-list {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    border-radius: 5px;
+    padding: 10px;
+    list-style: none;
+}
+
+.menu-list li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.menu-list li:hover {
+    background-color: rgba(0, 255, 0, 0.2);
+}
+
+.project-title {
+    font-size: 2rem;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.page-title {
+    font-size: 1.5rem;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #00ff00;
+}
+
+.logout-button {
+    background-color: #00ff00;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.logout-button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+}
+
+/* Robot Section */
+.robot-section {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.build-robo-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    background-color: #00ff00;
+    border: none;
+    border-radius: 5px;
+    color: black;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.build-robo-button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+}
+
+.robot-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.robot-card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px #00ff00;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    width: 250px;
+}
+
+.robot-image {
+    width: 100px;
+    height: 100px;
+}
+
+.robot-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.rename-button, .destroy-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.rename-button {
+    background-color: #00ff00;
+    color: black;
+}
+
+.rename-button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+}
+
+.destroy-button {
+    background-color: red;
+    color: white;
+}
+
+.destroy-button:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}

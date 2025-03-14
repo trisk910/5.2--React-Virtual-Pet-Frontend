@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Resources/Style/Welcome.css';
-import wallpaperWellcome from '../Resources/Images/optimized_background_4k.gif';
+import wallpaperWellcome from '../Resources/Images/Backgrounds/BackgroundMain.webp';
 
 function Welcome() {
     const navigate = useNavigate();

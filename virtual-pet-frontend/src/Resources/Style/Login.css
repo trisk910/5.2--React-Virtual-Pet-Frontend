@@ -86,3 +86,8 @@
 .register-link:hover span {
     color: #00cc00;
 }
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 10px;
+}
