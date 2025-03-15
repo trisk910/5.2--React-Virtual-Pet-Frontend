@@ -13,6 +13,7 @@ export default function Workshop() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [renameModal, setRenameModal] = useState({ open: false, robot: null });
     const [destroyModal, setDestroyModal] = useState({ open: false, robot: null });
+    const [buildModal, setBuildModal] = useState({ open: false, type: null });
     const [newName, setNewName] = useState("");
     const navigate = useNavigate();
 
@@ -109,6 +110,27 @@ export default function Workshop() {
         }
     };
 
+    const handleBuild = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/robos/build`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: JSON.stringify({ name: newName, type: buildModal.type.toLowerCase(), userId: user.id })
+            });
+            if (response.ok) {
+                fetchRobots(user);
+                setBuildModal({ open: false, type: null });
+            } else {
+                console.error("Failed to build robot:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error building robot:", error);
+        }
+    };
+
     return (
         <div className="workshop-container" style={{ backgroundImage: `url(${wallpaper})` }}>
             <header className="header">
@@ -138,10 +160,10 @@ export default function Workshop() {
 
             <div className="robot-section">
                 {robots.length === 0 ? (
-                    <button className="build-robo-button">Build Robo</button>
+                    <button className="build-robo-button" onClick={() => setBuildModal({ open: true, type: null })}>Build Robo</button>
                 ) : (
                     <>
-                        <button className="build-robo-button">Build Robo</button>
+                        <button className="build-robo-button" onClick={() => setBuildModal({ open: true, type: null })}>Build Robo</button>
                         <div className="robot-list">
                             {robots.map((robot) => (
                                 <div key={robot.id} className="robot-card">
@@ -190,6 +212,50 @@ export default function Workshop() {
                         <h3>Are you sure?</h3>
                         <button className="rename-button" onClick={handleDestroy}>Accept</button>
                         <button className="destroy-button" onClick={() => setDestroyModal({ open: false, robot: null })}>Cancel</button>
+                    </div>
+                </div>
+            )}
+
+            {buildModal.open && !buildModal.type && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Select Robot Type</h3>
+                        <div className="robot-selection">
+                            <div className="robot-card" onClick={() => setBuildModal({ open: true, type: "TANK" })}>
+                                <img src={tankImg} alt="Tank" className="robot-image" />
+                                <h3>TANK</h3>
+                                <p>Strong and durable, perfect for defense.</p>
+                                <button className="rename-button">Select</button>
+                            </div>
+                            <div className="robot-card" onClick={() => setBuildModal({ open: true, type: "MELEE" })}>
+                                <img src={meleeImg} alt="Melee" className="robot-image" />
+                                <h3>MELEE</h3>
+                                <p>Quick and agile, excels in close combat.</p>
+                                <button className="rename-button">Select</button>
+                            </div>
+                            <div className="robot-card" onClick={() => setBuildModal({ open: true, type: "RANGED" })}>
+                                <img src={rangedImg} alt="Ranged" className="robot-image" />
+                                <h3>RANGED</h3>
+                                <p>Expert in long-range attacks, keeps enemies at bay.</p>
+                                <button className="rename-button">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {buildModal.open && buildModal.type && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Build {buildModal.type} Robot</h3>
+                        <input
+                            type="text"
+                            value={newName}
+                            onChange={(e) => setNewName(e.target.value)}
+                            placeholder="Robot Name"
+                        />
+                        <button className="rename-button" onClick={handleBuild}>Build</button>
+                        <button className="destroy-button" onClick={() => setBuildModal({ open: false, type: null })}>Cancel</button>
                     </div>
                 </div>
             )}
