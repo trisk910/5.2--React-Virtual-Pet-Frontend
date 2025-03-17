@@ -37,13 +37,15 @@ export default function Workshop() {
     };
 
     const fetchRobots = async (user) => {
-        const endpoint = user.roleType === "ADMIN" ? "/robos/all" : `/robos/get/${user.id}`;
+        const endpoint = user.roleType.toUpperCase() === "ADMIN" ? "/robos/all" : `/robos/get/${user.id}`;
         try {
             const response = await fetch(`http://localhost:8080${endpoint}`, {
                 headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
             });
+            //console.log("User Role:", user.roleType);
             if (response.ok) {
                 const data = await response.json();
+                //console.log("Robots:", data);
                 if (data.robos && Array.isArray(data.robos)) {
                     setRobots(data.robos);
                 } else {
