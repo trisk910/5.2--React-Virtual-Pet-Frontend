@@ -29,8 +29,8 @@
 }
 
 .menu-icon {
-    width: 30px;
-    height: 30px;
+    width: 60px;
+    height: 60px;
     padding-left: 10px;
 }
 
@@ -225,7 +225,7 @@
     height: 100px;
 }
 
-.rename-button, .destroy-button {
+.rename-button, .destroy-button, .repair-button {
     padding: 5px 10px;
     border: none;
     border-radius: 5px;
@@ -251,5 +251,15 @@
 
 .destroy-button:hover {
     background-color: darkred;
+    transform: scale(1.05);
+}
+
+.repair-button {
+    background-color: #00ff00;
+    color: black;
+}
+
+.repair-button:hover {
+    background-color: #00cc00;
     transform: scale(1.05);
 }

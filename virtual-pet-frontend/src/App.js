@@ -5,6 +5,7 @@ import Login from './Components/Login';
 import './Resources/Style/Welcome.css';
 import Register from "./Components/Register";
 import Workshop from "./Components/Workshop";
+import BattleArena from "./Components/BattleArena";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/register" element={<Register />} />
                     <Route path="/workshop" element={<Workshop />} />
+                    <Route path="/battlearena" element={<BattleArena />} />
                 </Routes>
             </div>
         </Router>
