@@ -17,6 +17,8 @@ export default function Workshop() {
     const [buildModal, setBuildModal] = useState({ open: false, type: null });
     const [newName, setNewName] = useState("");
     const navigate = useNavigate();
+    const [insuficientCreditsModal, setinsuficientCreditsModal] = useState({ open: false, type: null });
+    const minBuildCredits = 100;
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -131,6 +133,10 @@ export default function Workshop() {
     };
 
     const handleBuild = async () => {
+        if(user.currency < minBuildCredits){
+            setinsuficientCreditsModal({ open: true, type: null });
+            return;
+        }
         try {
             const response = await fetch(`http://localhost:8080/robos/build`, {
                 method: "POST",
@@ -141,13 +147,34 @@ export default function Workshop() {
                 body: JSON.stringify({ name: newName, type: buildModal.type.toLowerCase(), userId: user.id })
             });
             if (response.ok) {
+                await subtractCurrency(minBuildCredits);
                 fetchRobots(user);
                 setBuildModal({ open: false, type: null });
+
             } else {
                 console.error("Failed to build robot:", response.statusText);
             }
         } catch (error) {
             console.error("Error building robot:", error);
+        }
+    };
+    const subtractCurrency = async (amount) => {
+        try {
+            const response = await fetch(`http://localhost:8080/subtract/${amount}`, {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            if (response.ok) {
+                const updatedUser = { ...user, currency: user.currency - amount };
+                setUser(updatedUser);
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+            } else {
+                console.error("Failed to subtract currency:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error subtracting currency:", error);
         }
     };
 
@@ -289,6 +316,15 @@ export default function Workshop() {
                         />
                         <button className="rename-button" onClick={handleBuild}>Build</button>
                         <button className="destroy-button" onClick={() => setBuildModal({ open: false, type: null })}>Cancel</button>
+                    </div>
+                </div>
+            )}
+            {insuficientCreditsModal.open && (
+                <div className="modal">
+                    <div className="modal-content">
+                        <h3>Insufficient Credits</h3>
+                        <p>You do not have enough credits to build a new robo.</p>
+                        <button className="rename-button" onClick={() => setinsuficientCreditsModal({ open: false, type: null })}>Accept</button>
                     </div>
                 </div>
             )}
