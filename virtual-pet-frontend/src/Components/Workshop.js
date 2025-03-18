@@ -160,7 +160,7 @@ export default function Workshop() {
     };
     const subtractCurrency = async (amount) => {
         try {
-            const response = await fetch(`http://localhost:8080/subtract/${amount}`, {
+            const response = await fetch(`http://localhost:8080/currency/substract/${amount}`, {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${localStorage.getItem("token")}`
@@ -188,7 +188,7 @@ export default function Workshop() {
                             <li onClick={() => navigate("/workshop")}>
                                 Workshop
                             </li>
-                            <li onClick={() => navigate("/battle-arena")}>
+                            <li onClick={() => navigate("/battlearena")}>
                                 Battle Arena
                             </li>
                         </ul>
