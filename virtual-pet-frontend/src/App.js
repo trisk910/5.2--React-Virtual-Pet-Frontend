@@ -6,6 +6,7 @@ import './Resources/Style/Welcome.css';
 import Register from "./Components/Register";
 import Workshop from "./Components/Workshop";
 import BattleArena from "./Components/BattleArena";
+import Leaderboard from "./Components/Leaderboard";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/register" element={<Register />} />
                     <Route path="/workshop" element={<Workshop />} />
                     <Route path="/battlearena" element={<BattleArena />} />
+                    <Route path="/leaderboard" element={<Leaderboard />} />
                 </Routes>
             </div>
         </Router>

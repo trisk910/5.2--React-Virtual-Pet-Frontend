@@ -86,7 +86,7 @@ export default function Workshop() {
                 }
             });
             if (response.ok) {
-                fetchRobots(user);
+                await fetchRobots(user);
                 setRenameModal({ open: false, robot: null });
             } else {
                 console.error("Failed to rename robot:", response.statusText);
@@ -105,7 +105,7 @@ export default function Workshop() {
                 }
             });
             if (response.ok) {
-                fetchRobots(user);
+                await fetchRobots(user);
                 setDestroyModal({ open: false, robot: null });
             }
         } catch (error) {
@@ -122,7 +122,7 @@ export default function Workshop() {
                 }
             });
             if (response.ok) {
-                fetchRobots(user);
+                await fetchRobots(user);
                 setRepairModal({ open: false, robot: null });
             } else {
                 console.error("Failed to repair robot:", response.statusText);
@@ -148,7 +148,7 @@ export default function Workshop() {
             });
             if (response.ok) {
                 await subtractCurrency(minBuildCredits);
-                fetchRobots(user);
+                await fetchRobots(user);
                 setBuildModal({ open: false, type: null });
 
             } else {
@@ -190,6 +190,9 @@ export default function Workshop() {
                             </li>
                             <li onClick={() => navigate("/battlearena")}>
                                 Battle Arena
+                            </li>
+                            <li onClick={() => navigate("/leaderboard")}>
+                                Leaderboard
                             </li>
                         </ul>
                     )}
