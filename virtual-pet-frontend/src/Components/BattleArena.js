@@ -110,7 +110,7 @@ import React, { useEffect, useState } from "react";
                         if (logIndex >= fightResult.combatLog.length) {
                             clearInterval(interval);
                             setShowReturnButton(true);
-                            fetchUser(); // Fetch updated user data after the fight
+                            fetchUser();
                         }
                     }, 1000);
                 };
@@ -196,6 +196,7 @@ import React, { useEffect, useState } from "react";
                                         <div key={robot.id} className="robot-card">
                                             <img src={getRobotImage(robot.type)} alt={robot.type} className="robot-image" />
                                             <h3>{robot.name}</h3>
+                                            <p>Level: {robot.level}</p>
                                             <p>Type: {robot.type}</p>
                                             <p>Stats:</p>
                                             <ul>
@@ -218,6 +219,7 @@ import React, { useEffect, useState } from "react";
                                 <div className="battle-robot-card">
                                     <img src={getRobotImage(selectedRobot.type)} alt={selectedRobot.type} className="robot-image" />
                                     <h3>{selectedRobot.name}</h3>
+                                    <p>Level: {selectedRobot.level}</p>
                                     <p>Type: {selectedRobot.type}</p>
                                     <p>Stats:</p>
                                     <ul>
@@ -255,6 +257,7 @@ import React, { useEffect, useState } from "react";
                                         <>
                                             <img src={getRobotImage(rivalRobot.type)} alt={rivalRobot.type} className="robot-image" />
                                             <h3>{rivalRobot.name}</h3>
+                                            <p>Level: {rivalRobot.level}</p>
                                             <p>Type: {rivalRobot.type}</p>
                                             <p>Stats:</p>
                                             <ul>
@@ -268,6 +271,7 @@ import React, { useEffect, useState } from "react";
                                         <>
                                             <img src={unknownImg} alt="Unknown" className="robot-image" />
                                             <h3>?</h3>
+                                            <p>Level: ?</p>
                                             <p>Type: ?</p>
                                             <p>Stats:</p>
                                             <ul>

@@ -223,6 +223,7 @@ export default function Workshop() {
                                 <div key={robot.id} className="robot-card">
                                     <img src={getRobotImage(robot.type)} alt={robot.type} className="robot-image" />
                                     <h3>{robot.name}</h3>
+                                    <p>Level: {robot.level}</p>
                                     <p>Type: {robot.type}</p>
                                     <p>Stats:</p>
                                     <ul>
