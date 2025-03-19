@@ -194,6 +194,7 @@ export default function Workshop() {
                             <li onClick={() => navigate("/leaderboard")}>
                                 Leaderboard
                             </li>
+                            <li onClick={() => navigate("/upgradeshop")}>Upgrade Shop</li>
                         </ul>
                     )}
                 </div>

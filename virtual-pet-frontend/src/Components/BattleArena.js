@@ -168,9 +168,8 @@ import React, { useEffect, useState } from "react";
                                     <ul className="menu-list">
                                         <li onClick={() => navigate("/workshop")}>Workshop</li>
                                         <li onClick={() => navigate("/battlearena")}>Battle Arena</li>
-                                        <li onClick={() => navigate("/leaderboard")}>
-                                            Leaderboard
-                                        </li>
+                                        <li onClick={() => navigate("/leaderboard")}>Leaderboard</li>
+                                        <li onClick={() => navigate("/upgradeshop")}>Upgrade Shop</li>
                                     </ul>
                                 )}
                             </div>

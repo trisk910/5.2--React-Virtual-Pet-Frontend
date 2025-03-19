@@ -1,0 +1,68 @@
+.robot-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.increment-button, .decrement-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    margin-left: 5px;
+}
+
+.increment-button {
+    background-color: #00ff00;
+    color: black;
+}
+
+.increment-button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+}
+
+.decrement-button {
+    background-color: red;
+    color: white;
+}
+
+.decrement-button:hover {
+    background-color: darkred;
+    transform: scale(1.05);
+}
+
+.upgrade-button, .cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+    width: 150px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.upgrade-button {
+    background-color: #00ff00;
+    color: black;
+}
+
+.upgrade-button:hover {
+    background-color: #00cc00;
+    transform: scale(1.05);
+}
+
+.cancel-button {
+    background-color: gray;
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: darkgray;
+    transform: scale(1.05);
+}

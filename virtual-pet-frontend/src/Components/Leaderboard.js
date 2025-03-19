@@ -55,6 +55,7 @@ import React, { useEffect, useState } from "react";
                                             <li onClick={() => navigate("/workshop")}>Workshop</li>
                                             <li onClick={() => navigate("/battlearena")}>Battle Arena</li>
                                             <li onClick={() => navigate("/leaderboard")}>Leaderboard</li>
+                                            <li onClick={() => navigate("/upgradeshop")}>Upgrade Shop</li>
                                         </ul>
                                     )}
                                 </div>

@@ -7,6 +7,7 @@ import Register from "./Components/Register";
 import Workshop from "./Components/Workshop";
 import BattleArena from "./Components/BattleArena";
 import Leaderboard from "./Components/Leaderboard";
+import UpgradeShop from "./Components/Upgradeshop";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/workshop" element={<Workshop />} />
                     <Route path="/battlearena" element={<BattleArena />} />
                     <Route path="/leaderboard" element={<Leaderboard />} />
+                    <Route path="/upgradeshop" element={<UpgradeShop />} />
                 </Routes>
             </div>
         </Router>
