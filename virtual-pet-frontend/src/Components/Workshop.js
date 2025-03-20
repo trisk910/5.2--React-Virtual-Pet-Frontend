@@ -19,7 +19,7 @@ export default function Workshop() {
     const [newName, setNewName] = useState("");
     const navigate = useNavigate();
     const [insuficientCreditsModal, setinsuficientCreditsModal] = useState({ open: false, type: null });
-    const minBuildCredits = 100;
+    const minBuildCredits = 100;/////
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
