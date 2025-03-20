@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchUser } from "../Utils/fetchUser";
 import "../Resources/Style/Workshop.css";
 import menuIcon from "../Resources/Images/menuIconv2.webp";
 import tankImg from "../Resources/Images/Robos/tank.png";
@@ -31,6 +32,11 @@ export default function Workshop() {
             fetchRobots(parsedUser);
         }
     }, [navigate]);
+    useEffect(() => {
+        if (user) {
+            fetchUser(setUser);
+        }
+    }, [user]);
 
     const profileIcons = {
         defaultProfile: require("../Resources/Images/ProfileImages/profileIcon.png"),

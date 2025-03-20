@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchUser } from "../Utils/fetchUser";
 import "../Resources/Style/Workshop.css";
 import "../Resources/Style/Leaderboard.css";
 import menuIcon from "../Resources/Images/menuIconv2.webp";
@@ -22,6 +23,12 @@ export default function Leaderboard() {
             fetchRanking();
         }
     }, [navigate]);
+
+    useEffect(() => {
+        if (user) {
+            fetchUser(setUser);
+        }
+    }, [user]);
 
     const fetchRanking = async () => {
         try {
