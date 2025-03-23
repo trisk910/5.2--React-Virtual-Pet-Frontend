@@ -18,7 +18,7 @@ export default function Workshop() {
     const [buildModal, setBuildModal] = useState({ open: false, type: null });
     const [newName, setNewName] = useState("");
     const navigate = useNavigate();
-    const [insuficientCreditsModal, setinsuficientCreditsModal] = useState({ open: false, type: null });
+    const [insuficientCreditsModal, setInsuficientCreditsModal] = useState({ open: false, type: null });
 
     useEffect(() => {
         const storedUser = localStorage.getItem("user");
@@ -31,11 +31,12 @@ export default function Workshop() {
             fetchRobots(parsedUser);
         }
     }, [navigate]);
-    useEffect(() => {
+
+   /* useEffect(() => {
         if (user) {
             fetchUser(setUser);
         }
-    }, [user]);
+    }, [user]);*/
 
     const profileIcons = {
         defaultProfile: require("../Resources/Images/ProfileImages/profileIcon.png"),
@@ -92,6 +93,7 @@ export default function Workshop() {
             });
             if (response.ok) {
                 await fetchRobots(user);
+                await fetchUser(setUser);
                 setRenameModal({ open: false, robot: null });
             } else {
                 console.error("Failed to rename robot:", response.statusText);
@@ -111,6 +113,7 @@ export default function Workshop() {
             });
             if (response.ok) {
                 await fetchRobots(user);
+                await fetchUser(setUser);
                 setDestroyModal({ open: false, robot: null });
             }
         } catch (error) {
@@ -128,6 +131,7 @@ export default function Workshop() {
             });
             if (response.ok) {
                 await fetchRobots(user);
+                await fetchUser(setUser);
                 setRepairModal({ open: false, robot: null });
             } else {
                 console.error("Failed to repair robot:", response.statusText);
@@ -154,7 +158,7 @@ export default function Workshop() {
             } else {
                 const errorMessage = await response.text();
                 if (errorMessage === "Insufficient Credits") {
-                    setinsuficientCreditsModal({ open: true, type: null });
+                    setInsuficientCreditsModal({ open: true, type: null });
                 } else {
                     console.error("Failed to build robot:", errorMessage);
                 }
@@ -164,6 +168,11 @@ export default function Workshop() {
         }
     };
 
+    const handleMenuNavigation = (path) => {
+        navigate(path);
+        fetchUser(setUser);
+    };
+
     return (
         <div className="workshop-container" style={{ backgroundImage: `url(${wallpaper})` }}>
             <header className="header">
@@ -171,16 +180,16 @@ export default function Workshop() {
                     <img src={menuIcon} alt="Menu" className="menu-icon" />
                     {menuOpen && (
                         <ul className="menu-list">
-                            <li onClick={() => navigate("/workshop")}>
+                            <li onClick={() => handleMenuNavigation("/workshop")}>
                                 Workshop
                             </li>
-                            <li onClick={() => navigate("/battlearena")}>
+                            <li onClick={() => handleMenuNavigation("/battlearena")}>
                                 Battle Arena
                             </li>
-                            <li onClick={() => navigate("/leaderboard")}>
+                            <li onClick={() => handleMenuNavigation("/leaderboard")}>
                                 Leaderboard
                             </li>
-                            <li onClick={() => navigate("/upgradeshop")}>Upgrade Shop</li>
+                            <li onClick={() => handleMenuNavigation("/upgradeshop")}>Upgrade Shop</li>
                         </ul>
                     )}
                 </div>
@@ -315,7 +324,7 @@ export default function Workshop() {
                     <div className="modal-content">
                         <h3>Insufficient Credits</h3>
                         <p>You do not have enough credits to build a new robo.</p>
-                        <button className="rename-button" onClick={() => setinsuficientCreditsModal({ open: false, type: null })}>Accept</button>
+                        <button className="rename-button" onClick={() => setInsuficientCreditsModal({ open: false, type: null })}>Accept</button>
                     </div>
                 </div>
             )}

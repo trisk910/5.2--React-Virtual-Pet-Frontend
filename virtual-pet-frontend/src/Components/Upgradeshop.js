@@ -30,11 +30,11 @@ export default function Upgradeshop() {
         }
     }, [navigate]);
 
-    useEffect(() => {
+   /* useEffect(() => {
         if (user) {
             fetchUser(setUser);
         }
-    }, [user]);
+    }, [user]);*/
 
     const fetchRobots = async (user) => {
         const endpoint = user.roleType.toUpperCase() === "ADMIN" ? "/robos/all" : `/robos/get/${user.id}`;
@@ -79,7 +79,6 @@ export default function Upgradeshop() {
             setMessage("Insufficient credits");
             return;
         }
-
         try {
             const response = await fetch(`http://localhost:8080/robos/${selectedRobot.id}/upgrade`, {
                 method: "POST",
@@ -87,10 +86,12 @@ export default function Upgradeshop() {
             });
             if (response.ok) {
                 setMessage("Robo upgraded successfully");
-                const updatedUser = { ...user, currency: user.currency - upgradeCost };
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-                setUser(updatedUser);
-                await fetchRobots(updatedUser);
+                //const updatedUser = { ...user, currency: user.currency - upgradeCost };
+                //localStorage.setItem("user", JSON.stringify(updatedUser));
+                //setUser(updatedUser);
+                await fetchUser(setUser);
+                //await fetchRobots(updatedUser);
+                await fetchRobots(user)
                 setSelectedRobot(null);
             } else {
                 setMessage("Upgrade failed");
@@ -153,7 +154,7 @@ export default function Upgradeshop() {
 
             <div className="robot-section">
                 {robots.length === 0 ? (
-                    <p>No robots available.</p>
+                    <p>No Robos available.</p>
                 ) : (
                     <div className="robot-list">
                         {robots.map((robot) => (

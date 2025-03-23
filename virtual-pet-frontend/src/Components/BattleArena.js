@@ -34,11 +34,11 @@ export default function BattleArena() {
         }
     }, [navigate]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (user) {
             fetchUser(setUser);
         }
-    }, [user]);
+    }, [user]);*/
 
     const fetchRobots = async (user) => {
         const endpoint = user.roleType.toUpperCase() === "ADMIN" ? "/robos/all" : `/robos/get/${user.id}`;
@@ -56,21 +56,6 @@ export default function BattleArena() {
             setRobots([]);
         }
     };
-
-    /*const fetchUser = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/auth/${user.id}`, {
-                headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
-            });
-            if (response.ok) {
-                const updatedUser = await response.json();
-                setUser(updatedUser);
-                localStorage.setItem("user", JSON.stringify(updatedUser));
-            }
-        } catch (error) {
-            console.error("Error fetching user data:", error);
-        }
-    };*/
 
     const handleLogout = () => {
         localStorage.removeItem("user");
@@ -117,7 +102,8 @@ export default function BattleArena() {
             if (logIndex >= fightResult.combatLog.length) {
                 clearInterval(interval);
                 setShowReturnButton(true);
-                fetchUser();
+                fetchUser(setUser);
+                fetchRobots(user);
             }
         }, 1000);
     };

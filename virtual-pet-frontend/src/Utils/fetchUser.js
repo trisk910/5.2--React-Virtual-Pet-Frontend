@@ -1,8 +1,19 @@
 export const fetchUser = async (setUser) => {
     try {
-        const response = await fetch(`http://localhost:8080/auth/${localStorage.getItem("userId")}`, {
-            headers: { "Authorization": `Bearer ${localStorage.getItem("token")}` }
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const userId = storedUser?.id;
+
+        if (!userId) {
+            console.error("User ID not found in localStorage.");
+            return;
+        }
+
+        const response = await fetch(`http://localhost:8080/auth/${userId}`, {
+            headers: {
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
         });
+
         if (response.ok) {
             const updatedUser = await response.json();
             setUser(updatedUser);
