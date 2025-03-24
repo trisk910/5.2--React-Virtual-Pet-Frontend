@@ -30,12 +30,6 @@ export default function Upgradeshop() {
         }
     }, [navigate]);
 
-   /* useEffect(() => {
-        if (user) {
-            fetchUser(setUser);
-        }
-    }, [user]);*/
-
     const fetchRobots = async (user) => {
         const endpoint = user.roleType.toUpperCase() === "ADMIN" ? "/robos/all" : `/robos/get/${user.id}`;
         try {

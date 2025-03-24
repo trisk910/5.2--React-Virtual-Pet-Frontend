@@ -32,12 +32,6 @@ export default function Workshop() {
         }
     }, [navigate]);
 
-   /* useEffect(() => {
-        if (user) {
-            fetchUser(setUser);
-        }
-    }, [user]);*/
-
     const profileIcons = {
         defaultProfile: require("../Resources/Images/ProfileImages/profileIcon.png"),
         rangedProfile: require("../Resources/Images/ProfileImages/rangedProfile.png"),
