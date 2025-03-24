@@ -37,12 +37,6 @@ This frontend connects with a backend built using **Spring Boot** and **MySQL**,
 
 ---
 
-## 📁 Folder Structure
-
-src/ ├── Components/ # Functional components (Login, Register, Pets, etc.) │ ├── Login.js │ ├── Register.js │ ├── BattleArena.js │ ├── Leaderboard.js │ ├── Upgradeshop.js │ └── Workshop.js │ ├── Navigation/ │ └── Welcome.js # Welcome screen component │ ├── Utils/ │ └── (helper functions, e.g., auth handling) │ ├── Resources/ # Pet resources and visuals (if used) ├── App.js # Main application logic └── index.js # Entry point
-
----
-
 ## 🔄 Integration with Backend
 
 This React app communicates with the backend via **Axios HTTP requests**.
